@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>打砖块</title>
+        <style media="screen">
+            canvas {
+                border: 1px black solid;
+            }
+        </style>
+        <!-- canvas2d game 相关文件 -->
+        <script src="canvas2dgame/utils.js" charset="utf-8"></script>
+        <script src="canvas2dgame/canvas2d_game.js" charset="utf-8"></script>
+        <script src="canvas2dgame/canvas2d_scene.js" charset="utf-8"></script>
+        <!-- 主场景文件 -->
+        <script src="scene/main/paddle.js" charset="utf-8"></script>
+        <script src="scene/main/ball.js" charset="utf-8"></script>
+        <script src="scene/main/block.js" charset="utf-8"></script>
+        <script src="scene/main/scene_main.js" charset="utf-8"></script>
+        <!-- 标题, 结束, 关卡编辑 场景 -->
+        <script src="scene/title/scene_title.js" charset="utf-8"></script>
+        <script src="scene/end/scene_end.js" charset="utf-8"></script>
+        <script src="scene/editor/editor.js" charset="utf-8"></script>
+        <script src="scene/editor/scene_editor.js" charset="utf-8"></script>
+        <!-- 关卡数据 -->
+        <script src="level.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <canvas id="id-canvas" width="400" height="300"></canvas>
+        <hr>
+        <input id="id-input-speed" type="range" min="1" max="120" value="">
+        <script src="main.js" charset="utf-8"></script>
+    </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>FlappyBird</title>
+        <style media="screen">
+            canvas {
+                border: 1px black solid;
+            }
+        </style>
+        <!-- canvas2d game 相关文件 -->
+        <script src="canvas2dgame/utils.js" charset="utf-8"></script>
+        <script src="canvas2dgame/canvas2d_game.js" charset="utf-8"></script>
+        <script src="canvas2dgame/canvas2d_scene.js" charset="utf-8"></script>
+        <script src="canvas2dgame/canvas2d_image.js" charset="utf-8"></script>
+        <script src="canvas2dgame/canvas2d_label.js" charset="utf-8"></script>
+        <script src="canvas2dgame/canvas2d_animation.js" charset="utf-8"></script>
+        <!-- 主场景文件 -->
+        <script src="scene/main/scene_main.js" charset="utf-8"></script>
+        <script src="scene/main/pipes.js" charset="utf-8"></script>
+        <script src="scene/main/ground.js" charset="utf-8"></script>
+        <script src="scene/main/bird.js" charset="utf-8"></script>
+        <!-- 标题, 结束 场景文件 -->
+        <script src="scene/title/scene_title.js" charset="utf-8"></script>
+        <script src="scene/end/scene_end.js" charset="utf-8"></script>
+        <!-- 配置数据 -->
+        <script src="config.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <canvas id="id-canvas" width="400" height="600"></canvas>
+        <hr>
+        <div class="canvas2d-controls"></div>
+        <script>
+            var sliderTemplate = function(key, name, value, min, max) {
+                var t = `
+                    <div class="">
+                        <label>
+                            <input class="canvas2d-auto-slider" type="range"
+                                value="${value}"
+                                min="${min}"
+                                max="${max}"
+                                data-value="config.${key}.value">
+                            ${name}: <span class="canvas2d-label">${value}</span>
+                        </label>
+                    </div>
+                `
+                return t
+            }
+
+            var insertControls = function() {
+                var t = ''
+                var keys = Object.keys(config)
+                for (var i = 0; i < keys.length; i++) {
+                    var k = keys[i]
+                    var c = config[k]
+                    t += sliderTemplate(k, c.name, c.value, c.min, c.max)
+                }
+                e('.canvas2d-controls').insertAdjacentHTML('beforeend', t)
+            }
+
+            var bindEvents = function() {
+                bindAll('.canvas2d-auto-slider', 'input', function(event) {
+                    var target = event.target
+                    var bindVar = target.dataset.value
+                    var v = target.value
+                    eval(bindVar + '=' + v)
+                    //
+                    var label = target.closest('label').querySelector('.canvas2d-label')
+                    label.innerText = v
+                })
+            }
+
+            var __main = function() {
+                insertControls()
+                bindEvents()
+            }
+
+            __main()
+        </script>
+        <script src="main.js" charset="utf-8"></script>
+    </body>
+</html>

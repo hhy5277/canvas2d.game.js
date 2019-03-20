@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>飞机大战</title>
+        <style media="screen">
+            canvas {
+                border: 1px black solid;
+            }
+        </style>
+        <!-- canvas2d game 相关文件 -->
+        <script src="canvas2dgame/utils.js" charset="utf-8"></script>
+        <script src="canvas2dgame/canvas2d_game.js" charset="utf-8"></script>
+        <script src="canvas2dgame/canvas2d_scene.js" charset="utf-8"></script>
+        <script src="canvas2dgame/canvas2d_image.js" charset="utf-8"></script>
+        <script src="canvas2dgame/canvas2d_label.js" charset="utf-8"></script>
+        <script src="canvas2dgame/canvas2d_particle_system.js" charset="utf-8"></script>
+        <!-- 主场景文件 -->
+        <script src="scene/main/sky.js" charset="utf-8"></script>
+        <script src="scene/main/cloud.js" charset="utf-8"></script>
+        <script src="scene/main/bullet.js" charset="utf-8"></script>
+        <script src="scene/main/enemy_bullet.js" charset="utf-8"></script>
+        <script src="scene/main/player.js" charset="utf-8"></script>
+        <script src="scene/main/enemy.js" charset="utf-8"></script>
+        <script src="scene/main/scene_main.js" charset="utf-8"></script>
+        <!-- 标题, 结束 场景 -->
+        <script src="scene/title/scene_title.js" charset="utf-8"></script>
+        <script src="scene/end/scene_end.js" charset="utf-8"></script>
+        <!-- 配置文件 -->
+        <script src="config.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <canvas id="id-canvas" width="360" height="540"></canvas>
+        <hr>
+        <script>
+            var sliderTemplate = function(key, name, value, min, max) {
+                var t = `
+                    <div class="">
+                        <label>
+                            <input class="canvas2d-auto-slider" type="range"
+                                value="${value}"
+                                min="${min}"
+                                max="${max}"
+                                data-value="config.${key}.value">
+                            ${name}: <span class="canvas2d-label">${value}</span>
+                        </label>
+                    </div>
+                `
+                return t
+            }
+            var t = ''
+            var keys = Object.keys(config)
+            for (var i = 0; i < keys.length; i++) {
+                var k = keys[i]
+                var c = config[k]
+                t += sliderTemplate(k, c.name, c.value, c.min, c.max)
+            }
+            e('hr').insertAdjacentHTML('afterend', t)
+            //
+            bindAll('.canvas2d-auto-slider', 'input', function(event) {
+                var target = event.target
+                var bindVar = target.dataset.value
+                var v = target.value
+                eval(bindVar + '=' + v)
+                //
+                var label = target.closest('label').querySelector('.canvas2d-label')
+                label.innerText = v
+            })
+        </script>
+        <script src="main.js" charset="utf-8"></script>
+    </body>
+</html>
